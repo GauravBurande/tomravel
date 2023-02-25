@@ -1,20 +1,23 @@
 import React,{useEffect,useState} from 'react';
+import Loading from './utils/Loading';
 import axios from 'axios';
 
 const Translations = () => {
 
   const [options, setOptions] = useState([]);
   const [to, setTo] = useState('en');
-  const [input, setInput] = useState('');
-  const [output, setOutput] = useState('');
+  // const [input, setInput] = useState('');
+  // const [output, setOutput] = useState('');
     const [array, setArray]  = useState([])
-  
+    const [base, setBase] = useState([])  
     const defaultText = ["Hello","How are you", "My name is George", " Thank you","Where is this place"]
 
 
 
     const defaultTranslate = () => {
-        setArray([])
+      array.splice(0,array.length);
+      base.splice(0,base.length);
+        
         defaultText.map((text) => {
             const params = new URLSearchParams();
             params.append('q', text);
@@ -28,35 +31,37 @@ const Translations = () => {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             }).then(res=>{
-            console.log(res.data)
-            let x = res.data.translatedText
-            array.push(x)
+            
+            array.push(res.data.translatedText)
             setArray([...array])
+            base.push(text)
+            setBase([...base])
+            console.log(base)
             console.log(array)
             
             })
             return 0
-        })
+        },)
     }
 
-  const translate = () => {
+  // const translate = () => {
    
-    const params = new URLSearchParams();
-    params.append('q', input);
-    params.append('source', 'en');
-    params.append('target', to);
-    params.append('api_key', 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx');
+  //   const params = new URLSearchParams();
+  //   params.append('q', input);
+  //   params.append('source', 'en');
+  //   params.append('target', to);
+  //   params.append('api_key', 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx');
 
-    axios.post('https://libretranslate.de/translate',params, {
-      headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    }).then(res=>{
-      //console.log(res.data)
-      setOutput(res.data.translatedText)
-    })
-  };
+  //   axios.post('https://libretranslate.de/translate',params, {
+  //     headers: {
+  //       'accept': 'application/json',
+  //       'Content-Type': 'application/x-www-form-urlencoded',
+  //     },
+  //   }).then(res=>{
+  //     //console.log(res.data)
+  //     setOutput(res.data.translatedText)
+  //   })
+  // };
 
   useEffect(() => {
     axios
@@ -67,26 +72,63 @@ const Translations = () => {
         setOptions(res.data);
       });
   }, []);
-  return (
+
+
+  if(options === []){
+    return(
+      <>
+        <Loading/>
+      </>
+    )
+  }
+
+  else{return (
     <>
-      <div className='pl-20' >
+      <div className='text-center min-h-[85vh]'>
         <h1 className='lg:text-5xl text-4xl font-bold py-3 pb-10'>Translation</h1>
-        Select Language : <select className='bg-transparent border border-solid rounded-lg focus:bg-black' onChange={(e) => setTo(e.target.value)}>
+        <span className=' font-bold py-3 pr-6 pb-10 text-lg '>Select Language :</span><select className='bg-transparent border border-solid rounded-lg focus:bg-black' onChange={(e) => setTo(e.target.value)}>
           {options.map((opt) => (
             <option key={opt.code} value={opt.code}>
               {opt.name}
             </option>
           ))}
         </select>  
+      <div className='pt-5 pb-7'>
+      <button className='border border-solid rounded-lg p-2 ' onClick={defaultTranslate} >Generate Greetings</button>
+      </div>
+
       
-      <button className='border border-solid rounded-lg ' onClick={defaultTranslate}>Translate</button>
-      <h3>Hello    ----   {array[0]}</h3>
-      <h3>How are you? ----  {array[1]}</h3>
-      <h3>My name is George -----  {array[2]}</h3>
-      <h3>Thank you ------  {array[3]}</h3>
-      <h3 className='pb-10'>Where is this place ------  {array[4]}</h3>
-      
-      Enter text to translate     
+      <table className="table-auto text-2xl " align='center'>
+        <thead>
+        </thead>
+        <tbody>
+          <tr >
+            <td className='pb-4 pr-6' >{base[0]}</td>
+            <td className='pb-4 pr-6' >{array[0]}</td>
+
+          </tr>
+          <tr>
+            <td className='pb-4 pr-6' >{base[1]}</td>
+            <td className='pb-4 pr-6' >{array[1]}</td>
+
+          </tr>
+          <tr>
+            <td className='pb-4 pr-6' >{base[2]}</td>
+            <td className='pb-4 pr-6' >{array[2]}</td>
+
+          </tr>
+          <tr>
+            <td className='pb-4 pr-6' >{base[3]}</td>
+            <td className='pb-4 pr-6' >{array[3]}</td>
+          </tr>
+          <tr>
+            <td className='pb-4 pr-6' >{base[4]}</td>
+            <td className='pb-4 pr-6' >{array[4]}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      {/* Enter text to translate     
       <div>
         
         <input className='bg-transparent pt-10 border border-solid rounded-lg'
@@ -99,10 +141,10 @@ const Translations = () => {
       </div>
       <div>
         <button className='border border-solid rounded-lg' onClick={e=>translate()}>Translate</button>
-      </div>
+      </div> */}
       </div>
     </>
-  )
+  )}
 }
 
 export default Translations
