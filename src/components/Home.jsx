@@ -1,5 +1,6 @@
 import React from 'react'
 import CopyCards from './home/CopyCards'
+import Footer from './home/Footer'
 import Hero from './home/Hero'
 import Svglogo from './home/Svglogo'
 
@@ -19,6 +20,7 @@ const Home = () => {
         <div className='px-10'>
         <Hero/>
         <CopyCards/>
+        <Footer/>
         </div>
     </div>
   )
