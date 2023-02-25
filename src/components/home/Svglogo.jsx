@@ -1,15 +1,15 @@
 const Svglogo = () => {
   return (
     <svg width="inherit" viewBox="0 -5 369.6666666666667 87.54954336106441"
-            class="css-1j8o68f">
+            className="css-1j8o68f">
             <defs id="SvgjsDefs2026">
                 <linearGradient id="SvgjsLinearGradient2031">
-                    <stop id="SvgjsStop2032" stop-color="rgb(181,231,157)" offset="0"></stop>
-                    <stop id="SvgjsStop2033" stop-color="#F3EF8D" offset="1"></stop>
+                    <stop id="SvgjsStop2032" stopColor="rgb(181,231,157)" offset="0"></stop>
+                    <stop id="SvgjsStop2033" stopColor="#F3EF8D" offset="1"></stop>
                 </linearGradient>
                 <linearGradient id="SvgjsLinearGradient2034">
-                    <stop id="SvgjsStop2035" stop-color="#F6EE8C" offset="0"></stop>
-                    <stop id="SvgjsStop2036" stop-color="#E0EC90" offset="1"></stop>
+                    <stop id="SvgjsStop2035" stopColor="#F6EE8C" offset="0"></stop>
+                    <stop id="SvgjsStop2036" stopColor="#E0EC90" offset="1"></stop>
                 </linearGradient>
             </defs>
             <g id="SvgjsG2027" featurekey="symbolFeature-0"

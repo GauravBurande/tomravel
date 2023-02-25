@@ -2,8 +2,8 @@ import React from 'react'
 
 const CopyCards = () => {
   return (
-    <div className='flex flex-col items-center'>
-        <h1 className='text-5xl font-bold'>What's Tomravel?</h1>
+    <div className='flex flex-col items-center justify-center'>
+        <h1 className='lg:text-5xl text-3xl font-bold text-center mx-auto pt-5'>What's Tomravel?</h1>
 
       <div className='flex flex-wrap pb-10 text-center xl:px-24 items-center justify-center'>
 
