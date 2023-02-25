@@ -53,7 +53,7 @@ const Translations = () => {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     }).then(res=>{
-      console.log(res.data)
+      //console.log(res.data)
       setOutput(res.data.translatedText)
     })
   };
@@ -64,7 +64,6 @@ const Translations = () => {
         headers: { accept: 'application/json' },
       })
       .then((res) => {
-        console.log(res.data);
         setOptions(res.data);
       });
   }, []);
@@ -90,13 +89,13 @@ const Translations = () => {
       Enter text to translate     
       <div>
         
-        <textarea className='bg-transparent pt-10 border border-solid rounded-lg'
+        <input className='bg-transparent pt-10 border border-solid rounded-lg'
           onInput={(e) => setInput(e.target.value)}
-        ></textarea>
+        ></input>
       </div>
             Translated text
       <div>
-        <textarea className='bg-transparent pt-10 border border-solid rounded-lg' value={output}></textarea>
+        <div className='bg-transparent pt-10 border border-solid rounded-lg w-48'>{output}</div>
       </div>
       <div>
         <button className='border border-solid rounded-lg' onClick={e=>translate()}>Translate</button>
