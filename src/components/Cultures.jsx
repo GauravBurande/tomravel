@@ -1,10 +1,11 @@
 import React from 'react'
+import WorkingOn from './utils/WorkingOn'
 
 const Cultures = () => {
   return (
     <div>
       <div>
-        discover about new places.
+        <WorkingOn/>
       </div>
     </div>
   )

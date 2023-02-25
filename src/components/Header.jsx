@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Svglogo from './Svglogo'
+import Svglogo from './utils/Svglogo'
 
 const Header = () => {
   return (
@@ -18,7 +18,7 @@ const Header = () => {
                   <p>explore</p>
                 </button>
 
-                <div className='absolute right-10 top-20 opacity-0 group-hover:opacity-100'>
+                <div className='absolute right-10 top-20 opacity-0 z-10 group-hover:opacity-100'>
                   <ul className='flex flex-col w-full space-y-6 bg-blue-200 cursor-pointer font-semibold px-6 py-4 rounded-3xl'>
                     <Link to={'/discover'}>
                     <li className=' text-black hover:text-gray-700'>🔎 discover new places</li>

@@ -1,10 +1,11 @@
 import React from 'react'
+import WorkingOn from './utils/WorkingOn'
 
 const Translations = () => {
   return (
     <div>
       <div>
-        you can add translations here
+        <WorkingOn/>
       </div>
     </div>
   )
