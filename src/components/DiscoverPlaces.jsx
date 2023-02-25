@@ -1,10 +1,11 @@
 import React from 'react'
+import WorkingOn from './utils/WorkingOn'
 
 const DiscoverPlaces = () => {
   return (
     <div>
       <div>
-        discovered places around the world
+        <WorkingOn/>
       </div>
     </div>
   )
