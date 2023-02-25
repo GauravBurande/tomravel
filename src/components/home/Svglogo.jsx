@@ -1,6 +1,6 @@
 const Svglogo = () => {
   return (
-    <svg width="200px" viewBox="0 -5 369.6666666666667 87.54954336106441"
+    <svg width="inherit" viewBox="0 -5 369.6666666666667 87.54954336106441"
             class="css-1j8o68f">
             <defs id="SvgjsDefs2026">
                 <linearGradient id="SvgjsLinearGradient2031">
