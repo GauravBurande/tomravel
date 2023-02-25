@@ -1,5 +1,4 @@
-import React,{useEffect,useState} from 'react'
-import WorkingOn from './utils/WorkingOn';
+import React,{useEffect,useState} from 'react';
 import axios from 'axios';
 
 const Translations = () => {
@@ -36,6 +35,7 @@ const Translations = () => {
             console.log(array)
             
             })
+            return 0
         })
     }
 
