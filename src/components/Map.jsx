@@ -11,7 +11,7 @@ const Map = () => {
     const [lat, setLat] = useState(18.16);
     const [zoom, setZoom] = useState(7.37);
     const [place, setPlace] = useState("");
-    const [search, setSearch] = useState(1);
+    // const [search, setSearch] = useState(1);
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
