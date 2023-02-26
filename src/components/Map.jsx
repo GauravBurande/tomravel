@@ -10,6 +10,7 @@ const Map = () => {
     const [lng, setLng] = useState(75.41);
     const [lat, setLat] = useState(18.16);
     const [zoom, setZoom] = useState(7.37);
+    const [loading, setLoading] = useState(false);
     const [searchInput, setInput] = useState("");
     const [searchData, setSearchData] = useState([]);
     const [category, setCategory] = useState("catering");
@@ -34,20 +35,23 @@ const Map = () => {
     });
 
     const getPlace = () => {
+        setLoading(true);
         fetch(`https://api.geoapify.com/v2/places?categories=${category}&conditions=${searchInput}&bias=proximity:-122.426668552272488455,37.781137113907178104&limit=20&apiKey=${process.env.REACT_APP_GEOAPIFY_API_KEY}`)
             .then(response => response.json())
             .then(data => {
                 setSearchData(data.features)
-            })
+            }).then(setLoading(false))
     }
 
     const categories = ["public_transport.subway", "accommodation", "activity", "commercial", "production", "postal_code", "political", "low_emission_zone", "populated_place", "administrative", "public_transport", "sport", "building", "airport", "adult", "beach", "amenity", "camping", "tourism", "service", "rental", "pet", "parking", "office", "national_park", "natural", "leisure", "entertainment", "childcare", "catering"]
 
     const getNearby = (category = "catering") => {
+        setLoading(true)
         setCategory(category)
         fetch(`https://api.geoapify.com/v2/places?categories=${category}&bias=proximity:-122.426668552272488455,37.781137113907178104&limit=20&apiKey=${process.env.REACT_APP_GEOAPIFY_API_KEY}`)
             .then(response => response.json())
             .then(data => setSearchData(data.features))
+            .then(setLoading(false))
     }
 
     // const featureData = {
@@ -70,7 +74,6 @@ const Map = () => {
 
     return (
         <div>
-
             <div className='mt-8 pb-10 relative'>
                 <div className="bg-gray-500 text-gray-200 py-3 px-6 font-mono z-10 absolute top-0 left-0 m-3 rounded-md">
                     Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
@@ -102,7 +105,7 @@ const Map = () => {
             </div>
 
             <div className="flex justify-center items-center">
-                <div className="mb-3 xl:w-96">
+                <div className="xl:w-96">
                     <div className="relative mb-4 flex w-full justify-center items-stretch">
                         <input
                             value={searchInput}
@@ -129,6 +132,16 @@ const Map = () => {
                         </span>
                     </div>
                 </div>
+
+            </div>
+
+            <div className='flex flex-col pb-5 items-center max-w-xl mx-auto justify-center'>
+                <p>conditions like:   internet_access, wheelchair,</p>
+                <p>dogs: Places where dogs are allowed, dogs.leashed,</p>
+                <p>access: Places that are available for public,</p>
+                <p>vegetarian: Places where you can buy or eat vegetarian food,</p>
+                <p>vegan: Places where you can buy or eat vegan food,</p>
+                <p>organic: Places where you can buy or eat organic food,</p>
             </div>
 
             <div>
@@ -164,7 +177,10 @@ const Map = () => {
                             }
                         </div>
                         : <div className='flex items-center justify-center py-8'>
-                            <p className=''>Please search something first.</p>
+                            <p className=''>{loading ? "" : "Please search something first."}</p>
+                            <div>
+                                {loading && <p>loading..</p>}
+                            </div>
                         </div>
                 }
             </div>
