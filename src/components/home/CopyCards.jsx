@@ -3,7 +3,7 @@ import React from 'react'
 const CopyCards = () => {
   return (
     <div className='flex flex-col items-center justify-center'>
-        <h1 className='lg:text-5xl text-3xl font-bold text-center mx-auto pt-5'>What's Tomravel?</h1>
+        <h1 className='lg:text-5xl text-3xl font-bold text-center mx-auto pt-5'>What's <span className='text-transparent bg-clip-text bg-gradient-to-bl from-amber-100 to-yellow-400'>Tomravel</span>?</h1>
 
       <div className='flex flex-wrap pb-10 text-center xl:px-24 items-center justify-center'>
 
