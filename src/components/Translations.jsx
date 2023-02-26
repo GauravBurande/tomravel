@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const Translations = () => {
 
-  const [options, setOptions] = useState(null);
+  const [options, setOptions] = useState([]);
   const [to, setTo] = useState('en');
   // const [input, setInput] = useState('');
   // const [output, setOutput] = useState('');
@@ -74,7 +74,7 @@ const Translations = () => {
   }, []);
 
 
-  if(options){
+  if(options !== []){
     return (
       <>
         <div className='text-center min-h-[85vh]'>
