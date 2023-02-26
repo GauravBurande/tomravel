@@ -4,7 +4,9 @@ const DiscoverPlaces = () => {
 
   return (
     <div>
-      <Map />
+      <div className="pb-10">
+        <Map />
+      </div>
     </div>
   )
 }
