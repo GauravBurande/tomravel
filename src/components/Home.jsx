@@ -6,8 +6,6 @@ import Hero from './home/Hero'
 const Home = () => {
   return (
     <div>
-        
-        
         <div className='px-10'>
         <Hero/>
         <CopyCards/>
