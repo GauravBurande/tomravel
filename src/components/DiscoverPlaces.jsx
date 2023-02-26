@@ -1,12 +1,10 @@
-import React from 'react'
-import WorkingOn from './utils/WorkingOn'
+import Map from "./Map"
 
 const DiscoverPlaces = () => {
+
   return (
     <div>
-      <div>
-        <WorkingOn/>
-      </div>
+      <Map />
     </div>
   )
 }
