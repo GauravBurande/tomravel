@@ -18,7 +18,7 @@ const Header = () => {
             <p>explore</p>
           </button>
 
-          <div className='absolute right-10 top-[77px] hidden z-10 group-hover:block'>
+          <div className='absolute right-10 top-[75px] hidden z-20 group-hover:block'>
             <ul className='flex flex-col w-full space-y-6 bg-blue-200 cursor-pointer font-semibold px-6 py-4 rounded-3xl'>
               <Link to={'/discover'}>
                 <li className=' text-black hover:text-gray-700'>🔎 discover new places</li>
@@ -32,6 +32,9 @@ const Header = () => {
               <Link to={'/cultures'}>
                 <li className=' text-black hover:text-gray-700'>✨ explore cultures</li>
               </Link>
+              <a href="https://github.com/GauravBurande/tomravel">
+                <li className=' text-black hover:text-gray-700 uppercase'>🐙 contribute</li>
+              </a>
             </ul>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import Loading from './utils/Loading'
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
@@ -13,7 +14,7 @@ const Map = () => {
     const [loading, setLoading] = useState(false);
     const [searchInput, setInput] = useState("");
     const [searchData, setSearchData] = useState([]);
-    const [category, setCategory] = useState("catering");
+    const [category, setCategory] = useState("tourism");
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
@@ -36,22 +37,26 @@ const Map = () => {
 
     const getPlace = () => {
         setLoading(true);
-        fetch(`https://api.geoapify.com/v2/places?categories=${category}&conditions=${searchInput}&bias=proximity:-122.426668552272488455,37.781137113907178104&limit=20&apiKey=${process.env.REACT_APP_GEOAPIFY_API_KEY}`)
+        fetch(`https://api.geoapify.com/v2/places?categories=${category}&conditions=${searchInput}&bias=proximity:${lng},${lat}&limit=20&apiKey=${process.env.REACT_APP_GEOAPIFY_API_KEY}`)
             .then(response => response.json())
             .then(data => {
                 setSearchData(data.features)
-            }).then(setLoading(false))
+                setLoading(false)
+                console.log(data.features)
+            })
     }
 
     const categories = ["public_transport.subway", "accommodation", "activity", "commercial", "production", "postal_code", "political", "low_emission_zone", "populated_place", "administrative", "public_transport", "sport", "building", "airport", "adult", "beach", "amenity", "camping", "tourism", "service", "rental", "pet", "parking", "office", "national_park", "natural", "leisure", "entertainment", "childcare", "catering"]
 
-    const getNearby = (category = "catering") => {
+    const getNearby = (category) => {
         setLoading(true)
-        setCategory(category)
-        fetch(`https://api.geoapify.com/v2/places?categories=${category}&bias=proximity:-122.426668552272488455,37.781137113907178104&limit=20&apiKey=${process.env.REACT_APP_GEOAPIFY_API_KEY}`)
+        fetch(`https://api.geoapify.com/v2/places?categories=${category}&bias=proximity:${lng},${lat}&limit=20&apiKey=${process.env.REACT_APP_GEOAPIFY_API_KEY}`)
             .then(response => response.json())
-            .then(data => setSearchData(data.features))
-            .then(setLoading(false))
+            .then(data => {
+                setCategory(category)
+                setSearchData(data.features)
+                setLoading(false)
+            })
     }
 
     // const featureData = {
@@ -74,6 +79,13 @@ const Map = () => {
 
     return (
         <div>
+            {loading && <div className='h-full fixed w-full inset-0 z-30 flex items-center justify-center'>
+                <div className='h-full w-full absolute -z-10 bg-black opacity-50'></div>
+                <div className='bg-gray-500 rounded-3xl absolute max-w-xs max-h-80'>
+                    <Loading />
+                </div>
+            </div>}
+
             <div className='mt-8 pb-10 relative'>
                 <div className="bg-gray-500 text-gray-200 py-3 px-6 font-mono z-10 absolute top-0 left-0 m-3 rounded-md">
                     Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
